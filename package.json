@@ -1,5 +1,5 @@
 {
-  "name": "modal-login",
+  "name": "modal-popup-login",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -8,14 +8,14 @@
     "@testing-library/user-event": "^12.1.10",
     "@types/jest": "^26.0.15",
     "@types/node": "^12.0.0",
-    "@types/react": "^17.0.2",
+    "@types/react": "^17.0.1",
     "@types/react-dom": "^17.0.0",
     "@types/react-responsive": "^8.0.2",
     "@types/styled-components": "^5.1.7",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-responsive": "^8.2.0",
-    "react-scripts": "4.0.3",
+    "react-scripts": "4.0.2",
     "styled-components": "^5.2.1",
     "typescript": "^4.1.2",
     "web-vitals": "^1.0.1"

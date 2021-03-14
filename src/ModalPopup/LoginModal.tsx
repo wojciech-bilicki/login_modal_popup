@@ -1,60 +1,66 @@
 import React, { useState } from 'react';
-import { InputWithIcon } from './InputWithIcon';
-import { BottomContainer, Button, Error } from './ModalPopup.styles';
-import { ReactComponent as LoginIcon } from '../assets/user.svg'
-import { ReactComponent as PasswordIcon } from '../assets/padlock.svg'
+import ModalRWD from './ModalRWD';
+import { ReactComponent as LoginIcon } from '../assets/user.svg';
+import { ReactComponent as PasswordIcon } from '../assets/padlock.svg';
+import InputWithIcon from './InputWithIcon';
+import { Button, ButtonContainer, Error } from './ModalPopup.styled';
 
-import RWDModal from './RWDModal';
+export interface LoginArgs {
+  password: string;
+  login: string;
+}
+
+export type LoginFunction = (args: LoginArgs) => Promise<void>;
 
 interface LoginModalProps {
-  loginError?: string;
+  onClose: () => void;
   isModalVisible: boolean;
-  onBackdropClick: () => void;
+  loginError?: string;
+  onLoginRequested: LoginFunction;
 }
 
 const LoginModal: React.FC<LoginModalProps> = ({
   loginError,
   isModalVisible,
-  onBackdropClick,
+  onClose,
+  onLoginRequested,
 }) => {
 
-  const [loginValue, setLoginValue] = useState('');
-  const [password, setPasswordValue] = useState('');
+  const [login, setLogin ] = useState('')
+  const [password, setPassword] = useState('')
+
+  const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if(e.key === 'Enter') {
+      onLoginRequested({login, password})
+    }
+  }
 
   return (
-    <RWDModal
-      onBackdropClick={onBackdropClick}
+    <ModalRWD
+      onBackdropClick={onClose}
       isModalVisible={isModalVisible}
       header="Login"
       message="Please log in"
       content={
         <>
-        <InputWithIcon 
-          value={loginValue}
-          onChange={e => setPasswordValue(e.target.value)}
-          type="text"
-          icon={
-            <LoginIcon width="24px" height="24px" fill="white" />
-          }
+          <InputWithIcon
+            onKeyDown={onKeyDown}
+            value={login}
+            onChange={e => setLogin(e.target.value)}
+            type="text"
+            icon={<LoginIcon width="24px" height="24px" fill="white" />}
           />
-        <InputWithIcon
-          
-          onChange={e => setLoginValue(e.target.value)}
-          value={password}
-          type="password"
-          icon={
-            <PasswordIcon width="24px" height="24px" fill="white" />
-          }
-        />
-         {loginError && (
-                <Error >
-                  {loginError}
-                </Error>
-              )}
-        <BottomContainer>
-          <Button onClick={onBackdropClick}>Close</Button>
-        <Button>Login</Button>
-        </BottomContainer>
+          <InputWithIcon
+            onKeyDown={onKeyDown}
+            onChange={e => setPassword(e.target.value)}
+            type="password"
+            icon={<PasswordIcon width="24px" height="24px" fill="white" />}
+          />
+          {loginError && <Error>{loginError}</Error>}
+          <ButtonContainer>
+            <Button onClick={onClose}>Cancel</Button>
+            <Button onClick={() => onLoginRequested({password, login})}>Login</Button>
+          </ButtonContainer>
         </>
       }
     />
