@@ -8,6 +8,12 @@ const ModalContainer = styled.div`
   position: relative;
 `;
 
+export const Error = styled.div`
+  padding: 15px 0;
+  font-size: 13px;
+  color: red;
+`;
+
 export const DesktopModalContainer = styled(ModalContainer)`
   border-radius: 7px;
   box-shadow: 0 0 32px rgba(0,0,0,0.5);
@@ -101,3 +107,31 @@ export const DesktopCloseButton = styled(CloseButton)`
 export const MobileCloseButton = styled(CloseButton)`
   left: calc(100% - ${CLOSE_BUTTON_SIZE * 1.5 + 10}px)
 `
+
+export const BottomContainer = styled.div`
+  padding-top: 10%;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+`;
+
+export const Button = styled.div`
+    cursor: pointer;
+    border: 3px solid rgb(200, 0, 0);
+    font-size: 15px;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 150px;
+    padding: 8px 16px;
+    line-height: 1em;
+    color: rgb(255, 255, 255);
+    background-color: rgb(200, 0, 0);
+
+    &:hover {
+      color: rgb(0, 0, 0);
+      background-color: rgb(255, 255, 255);
+      border-color: rgb(255, 255, 255);
+    }
+  `

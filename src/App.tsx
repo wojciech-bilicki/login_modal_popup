@@ -1,6 +1,6 @@
 import './App.css';
 import { useState } from 'react'
-import RWDModal from './ModalPopup/RWDModal';
+import LoginModal from './ModalPopup/LoginModal';
 
 function App() {
 
@@ -13,7 +13,7 @@ function App() {
   return (
     <div className="App">
       <button onClick={toggleModal}>Show Modal</button>    
-      <RWDModal header="Login" message="Please log in" isModalVisible={isModalVisible} onBackdropClick={toggleModal} /> 
+      <LoginModal loginError="Credentials are wrong"  isModalVisible={isModalVisible} onBackdropClick={toggleModal} />
     </div>
   );
 }
