@@ -1,22 +1,27 @@
 import React, { useState } from 'react';
-import ModalRWD from './ModalRWD';
-import { ReactComponent as LoginIcon } from '../assets/user.svg';
-import { ReactComponent as PasswordIcon } from '../assets/padlock.svg';
-import InputWithIcon from './InputWithIcon';
-import { Button, ButtonContainer, Error } from './ModalPopup.styled';
-import { AuthFunction } from '../types';
+import ModalRWD from '../../ModalPopup/ModalRWD';
+import { ReactComponent as LoginIcon } from '../../assets/user.svg';
+import { ReactComponent as PasswordIcon } from '../../assets/padlock.svg';
+import InputWithIcon from '../../ModalPopup/InputWithIcon';
+import { Button, ButtonContainer, Error } from '../../ModalPopup/ModalPopup.styled';
+import { Link } from 'react-router-dom';
 
+export interface LoginArgs {
+  password: string;
+  login: string;
+}
+
+export type LoginFunction = (args: LoginArgs) => Promise<void>;
 
 interface LoginModalProps {
   onClose: () => void;
   isModalVisible: boolean;
   loginError?: string;
-  onLoginRequested: AuthFunction;
+  onLoginRequested: LoginFunction;
 }
 
 const LoginModal: React.FC<LoginModalProps> = ({
   loginError,
-  isModalVisible,
   onClose,
   onLoginRequested,
 }) => {
@@ -33,10 +38,11 @@ const LoginModal: React.FC<LoginModalProps> = ({
   return (
     <ModalRWD
       onBackdropClick={onClose}
-      isModalVisible={isModalVisible}
+      isModalVisible={true}
       header="Login"
       message="Please log in"
     >
+
       <>
         <InputWithIcon
           onKeyDown={onKeyDown}
@@ -56,8 +62,12 @@ const LoginModal: React.FC<LoginModalProps> = ({
           <Button onClick={onClose}>Cancel</Button>
           <Button onClick={() => onLoginRequested({ password, login })}>Login</Button>
         </ButtonContainer>
+        <ButtonContainer>
+          <Link to="/register">Register</Link>
+          <Link to="/forgot_password">Forgot password</Link>
+        </ButtonContainer>
       </>
-    </ModalRWD>
+    </ModalRWD >
   );
 };
 

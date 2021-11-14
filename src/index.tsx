@@ -1,12 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import RegisterModalWrapper from './routes/register/RegisterModalWrapper';
+import ForgotPasswordWrapper from './routes/forgotPassword/ForgotPasswordWrapper';
+import LoginModalWrapper from './routes/login/LoginModalWrapper';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />} >
+          <Route path="login" element={<LoginModalWrapper />} />
+          <Route path="register" element={<RegisterModalWrapper />} />
+          <Route path="forgot_password" element={<ForgotPasswordWrapper />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );
